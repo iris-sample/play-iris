@@ -1,9 +1,12 @@
-<html>
-    <head>
-        <title>{{ .Title}}</title>
-    </head>
-    <body>
-        <h1>{{ .Title}}</h1>
-        <p>{{ .Content}}</p>
-    </body>
-</html>
+<div class="blog-post">
+    <h3>{{ .Title }}
+        <small>{{ .FormattedDate }}</small>
+    </h3>
+    <p>{{ .Content }}</p>
+    <div class="callout">
+        <ul class="menu simple">
+            <li><a href="#">Author: Mike Mikers</a></li>
+            <li><a href="#">Comments: 3</a></li>
+        </ul>
+    </div>
+</div>

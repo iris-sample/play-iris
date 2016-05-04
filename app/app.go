@@ -3,14 +3,14 @@ package app
 import (
 	"github.com/serajam/play-iris/app/connectors"
 	"fmt"
-	"database/sql"
 	"log"
 	"github.com/joho/godotenv"
 	"os"
+	"github.com/jinzhu/gorm"
 )
 
 type Application struct {
-	Db *sql.DB
+	Gorm *gorm.DB
 }
 
 func Initialize() Application {

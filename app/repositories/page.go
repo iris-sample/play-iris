@@ -4,20 +4,25 @@ import (
 	"database/sql"
 	"github.com/serajam/play-iris/app/models"
 	"log"
+	"github.com/jinzhu/gorm"
 )
 
 type PageRepository struct {
-	Db *sql.DB
+	Gorm *gorm.DB
 }
 
 func (p PageRepository) GetPage(id int) *models.Page {
 	page := models.Page{}
-	row := p.Db.QueryRow("SELECT id, title, content FROM pages WHERE id = $1", id)
-	err := row.Scan(&page.Id, &page.Title, &page.Content)
-
-	checkErr(err)
+	p.Gorm.First(&page, id)
 
 	return &page
+}
+
+func (p PageRepository) GetPagesWithLimit(limit int) []*models.Page {
+	pages := make([]*models.Page, limit)
+	p.Gorm.Limit(limit).Order("created DESC").Find(&pages)
+
+	return pages
 }
 
 func checkErr(err error) {

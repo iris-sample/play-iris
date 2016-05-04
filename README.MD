@@ -7,6 +7,7 @@
 # Install dependencies
 * `go get github.com/kataras/iris`
 * `go get github.com/joho/godotenv`
+* `go get github.com/jinzhu/gorm`
 
 # Running
 * Compile app `go build`
