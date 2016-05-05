@@ -1,9 +1,7 @@
 package repositories
 
 import (
-	"database/sql"
 	"github.com/serajam/play-iris/app/models"
-	"log"
 	"github.com/jinzhu/gorm"
 )
 
@@ -23,13 +21,4 @@ func (p PageRepository) GetPagesWithLimit(limit int) []*models.Page {
 	p.Gorm.Limit(limit).Order("created DESC").Find(&pages)
 
 	return pages
-}
-
-func checkErr(err error) {
-	switch {
-	case err == sql.ErrNoRows:
-		log.Printf("No user with that ID.")
-	case err != nil:
-		log.Fatal(err)
-	}
 }

@@ -19,6 +19,5 @@ type HomePageHandler struct {
 func (h HomePageHandler) Serve(c *iris.Context) {
 	p := h.Repository.GetPagesWithLimit(10)
 	pages := PagesCollection{p}
-
 	c.Render(home_page_template, pages)
 }

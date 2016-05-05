@@ -3,21 +3,19 @@ package main
 import (
 	"github.com/kataras/iris"
 	"github.com/serajam/play-iris/app"
-	"github.com/serajam/play-iris/app/handlers"
-	"github.com/serajam/play-iris/app/repositories"
+	"os"
+	"fmt"
 )
 
 func main() {
-	a := app.Initialize()
-	r := repositories.PageRepository{a.Gorm}
 
+	app.Initialize()
+
+	iris.Config().Render.Gzip = true
 	iris.Config().Render.Directory = "app/views"
 	iris.Config().Render.Layout = "layout"
 	iris.Config().Render.RequirePartials = true
 
-	iris.Handle("GET", "/", handlers.HomePageHandler{&r})
-	iris.Handle("GET", "/page/:id", handlers.PageHandler{&r})
-	iris.Static("/public", "./public/", 1)
-
-	iris.Listen(":8080")
+	fmt.Printf("Listen on port %s", os.Getenv("LISTEN_PORT"))
+	iris.Listen(os.Getenv("LISTEN_PORT"))
 }
